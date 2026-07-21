@@ -1,94 +1,169 @@
-const WATER_ELECTRICITY = 500;
+const formatCurrency = (value) =>
+    `₦${Number(value).toLocaleString("en-NG", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    })}`;
 
-function pieceCost(totalPrice, quantity){
-    return quantity === 0 ? 0 : totalPrice / quantity;
+function getValue(id) {
+    return Number(document.getElementById(id).value) || 0;
 }
 
-function calculate(){
+function getUnitCost(totalCost, quantity) {
+    return quantity > 0 ? totalCost / quantity : 0;
+}
 
-    const seedKg = Number(document.getElementById("seedKg").value);
-    const seedPrice = Number(document.getElementById("seedPrice").value);
+function calculateProduct({
+    name,
+    litres,
+    packageQty,
+    packagePrice,
+    stickerQty,
+    stickerPrice,
+    nylonCost,
+    syrupPerLitre
+}) {
+    if (packageQty <= 0) {
+        return {
+            name,
+            syrupCost: 0,
+            packagingCost: 0,
+            totalCost: 0
+        };
+    }
 
-    const gasKg = Number(document.getElementById("gasKg").value);
-    const gasPrice = Number(document.getElementById("gasPrice").value);
+    const syrupCost = litres * syrupPerLitre;
 
-    const stickerQty = Number(document.getElementById("stickerQty").value);
-    const stickerPrice = Number(document.getElementById("stickerPrice").value);
+    const packagingCost =
+        getUnitCost(packagePrice, packageQty) +
+        getUnitCost(stickerPrice, stickerQty) +
+        nylonCost;
 
-    const nylonQty = Number(document.getElementById("nylonQty").value);
-    const nylonPrice = Number(document.getElementById("nylonPrice").value);
+    return {
+        name,
+        syrupCost,
+        packagingCost,
+        totalCost: syrupCost + packagingCost
+    };
+}
 
-    const familyQty = Number(document.getElementById("familyBottleQty").value);
-    const familyPrice = Number(document.getElementById("familyBottlePrice").value);
+function addHistory(products) {
+    const tbody = document.getElementById("historyBody");
 
-    const decanterQty = Number(document.getElementById("decanterBottleQty").value);
-    const decanterPrice = Number(document.getElementById("decanterBottlePrice").value);
+    const row = document.createElement("tr");
 
-    const pouchQty = Number(document.getElementById("pouchQty").value);
-    const pouchPrice = Number(document.getElementById("pouchPrice").value);
+    row.innerHTML = `
+        <td>${new Date().toLocaleString()}</td>
+        <td>${formatCurrency(products[0].totalCost)}</td>
+        <td>${formatCurrency(products[1].totalCost)}</td>
+        <td>${formatCurrency(products[2].totalCost)}</td>
+        <td>${formatCurrency(products[3].totalCost)}</td>
+    `;
 
-    const businessQty = Number(document.getElementById("businessBottleQty").value);
-    const businessPrice = Number(document.getElementById("businessBottlePrice").value);
+    tbody.prepend(row);
+}
 
+function calculate() {
+
+    const seedKg = getValue("seedKg");
+    const seedPrice = getValue("seedPrice");
+
+    const gasKg = getValue("gasKg");
+    const gasPrice = getValue("gasPrice");
+
+    const waterCost = getValue("waterCost");
+
+    if (seedKg <= 0) {
+        alert("Please enter the total kilograms of date seeds.");
+        return;
+    }
+
+    if (gasKg <= 0) {
+        alert("Please enter the total kilograms of gas.");
+        return;
+    }
+
+    // Raw material cost per litre
     const seedCostPerKg = seedPrice / seedKg;
     const gasCostPerKg = gasPrice / gasKg;
 
     const syrupPerLitre =
-        (seedCostPerKg * 3)
-        + (gasCostPerKg * 0.3125)
-        + WATER_ELECTRICITY;
+        (seedCostPerKg * 3) +
+        (gasCostPerKg * 0.3125) +
+        waterCost;
 
-    const sticker = pieceCost(stickerPrice, stickerQty);
-    const nylon = pieceCost(nylonPrice, nylonQty);
+    // Common nylon cost (only for bottled products)
+    const nylonCost = getUnitCost(
+        getValue("nylonPrice"),
+        getValue("nylonQty")
+    );
 
-    const familyBottle = pieceCost(familyPrice, familyQty);
-    const decanterBottle = pieceCost(decanterPrice, decanterQty);
-    const pouch = pieceCost(pouchPrice, pouchQty);
-    const businessBottle = pieceCost(businessPrice, businessQty);
+    const products = [
 
-    const familyCost =
-        (1.2 * syrupPerLitre)
-        + familyBottle
-        + sticker
-        + nylon;
+        // Family Bottle (USES NYLON)
+        calculateProduct({
+            name: "Family Bottle (1.2L)",
+            litres: 1.2,
+            packageQty: getValue("familyBottleQty"),
+            packagePrice: getValue("familyBottlePrice"),
+            stickerQty: getValue("familyStickerQty"),
+            stickerPrice: getValue("familyStickerPrice"),
+            nylonCost: nylonCost,
+            syrupPerLitre
+        }),
 
-    const decanterCost =
-        (0.33 * syrupPerLitre)
-        + decanterBottle
-        + sticker
-        + nylon;
+        // Decanter (USES NYLON)
+        calculateProduct({
+            name: "Decanter Bottle (330ml)",
+            litres: 0.33,
+            packageQty: getValue("decanterBottleQty"),
+            packagePrice: getValue("decanterBottlePrice"),
+            stickerQty: getValue("decanterStickerQty"),
+            stickerPrice: getValue("decanterStickerPrice"),
+            nylonCost: nylonCost,
+            syrupPerLitre
+        }),
 
-    const pouchCost =
-        (0.03 * syrupPerLitre)
-        + pouch
-        + sticker
-        + nylon;
+        // Pocket Pouch (NO NYLON)
+        calculateProduct({
+            name: "Pocket Pouch (30ml)",
+            litres: 0.03,
+            packageQty: getValue("pocketPouchQty"),
+            packagePrice: getValue("pocketPouchPrice"),
+            stickerQty: getValue("pocketStickerQty"),
+            stickerPrice: getValue("pocketStickerPrice"),
+            nylonCost: 0,
+            syrupPerLitre
+        }),
 
-    const businessCost =
-        (5 * syrupPerLitre)
-        + businessBottle
-        + sticker
-        + nylon;
+        // Business Pouch (NO NYLON)
+        calculateProduct({
+            name: "Business Pouch (5L)",
+            litres: 5,
+            packageQty: getValue("businessPouchQty"),
+            packagePrice: getValue("businessPouchPrice"),
+            stickerQty: getValue("businessStickerQty"),
+            stickerPrice: getValue("businessStickerPrice"),
+            nylonCost: 0,
+            syrupPerLitre
+        })
 
-    document.getElementById("results").innerHTML = `
-    <tr>
-        <td>Family 1.2L</td>
-        <td>₦${familyCost.toFixed(2)}</td>
-    </tr>
+    ];
 
-    <tr>
-        <td>Decanter 330ml</td>
-        <td>₦${decanterCost.toFixed(2)}</td>
-    </tr>
+    const results = document.getElementById("results");
+    results.innerHTML = "";
 
-    <tr>
-        <td>Pouch 30ml</td>
-        <td>₦${pouchCost.toFixed(2)}</td>
-    </tr>
+    products.forEach(product => {
 
-    <tr>
-        <td>Business 5L</td>
-        <td>₦${businessCost.toFixed(2)}</td>
-    </tr>
-    `;
+        results.innerHTML += `
+            <tr>
+                <td>${product.name}</td>
+                <td>${formatCurrency(product.syrupCost)}</td>
+                <td>${formatCurrency(product.packagingCost)}</td>
+                <td>${formatCurrency(product.totalCost)}</td>
+            </tr>
+        `;
+
+    });
+
+    addHistory(products);
 }

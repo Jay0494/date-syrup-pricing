@@ -1,165 +1,295 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Date Syrup Pricing Calculator</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AmbyDates Foods Ltd - Date Syrup Pricing Calculator</title>
 
-<link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <div class="container">
 
-<h1>Date Syrup Pricing Calculator</h1>
+    <header>
+        <h1>AmbyDates Foods Limited</h1>
+        <p>Date Syrup Production Cost Calculator</p>
+    </header>
 
-<h2>Date Seeds</h2>
+    <!-- ================= RAW MATERIALS ================= -->
 
-<div class="grid">
+    <section class="card">
+        <h2>Raw Materials</h2>
 
-<div>
-<label>Total Kg Bought</label>
-<input id="seedKg" type="number">
-</div>
+        <div class="grid">
 
-<div>
-<label>Total Price (₦)</label>
-<input id="seedPrice" type="number">
-</div>
+            <div class="input-group">
+                <label>Total Date Seeds (Kg)</label>
+                <input type="number" id="seedKg" min="0" step="0.01">
+            </div>
 
-</div>
+            <div class="input-group">
+                <label>Total Date Seeds Cost (₦)</label>
+                <input type="number" id="seedPrice" min="0">
+            </div>
 
-<h2>Gas</h2>
+            <div class="input-group">
+                <label>Total Gas (Kg)</label>
+                <input type="number" id="gasKg" min="0" step="0.01">
+            </div>
 
-<div class="grid">
+            <div class="input-group">
+                <label>Total Gas Cost (₦)</label>
+                <input type="number" id="gasPrice" min="0">
+            </div>
 
-<div>
-<label>Total Kg</label>
-<input id="gasKg" type="number">
-</div>
+            <div class="input-group">
+                <label>Water & Electricity (₦)</label>
+                <input type="number" id="waterCost" value="500">
+            </div>
 
-<div>
-<label>Total Price (₦)</label>
-<input id="gasPrice" type="number">
-</div>
+        </div>
+    </section>
 
-</div>
+    <!-- ================= COMMON PACKAGING ================= -->
 
-<h2>Sticker</h2>
+    <section class="card">
+        <h2>Common Packaging</h2>
 
-<div class="grid">
+        <div class="grid">
 
-<div>
-<label>Quantity</label>
-<input id="stickerQty" type="number">
-</div>
+            <div class="input-group">
+                <label>Sealing Nylon Quantity</label>
+                <input type="number" id="nylonQty" min="0">
+            </div>
 
-<div>
-<label>Total Price</label>
-<input id="stickerPrice" type="number">
-</div>
+            <div class="input-group">
+                <label>Sealing Nylon Total Cost (₦)</label>
+                <input type="number" id="nylonPrice" min="0">
+            </div>
 
-</div>
+        </div>
 
-<h2>Sealing Nylon</h2>
+    </section>
 
-<div class="grid">
+    <!-- ================= FAMILY ================= -->
 
-<div>
-<label>Quantity</label>
-<input id="nylonQty" type="number">
-</div>
+    <section class="card">
 
-<div>
-<label>Total Price</label>
-<input id="nylonPrice" type="number">
-</div>
+        <h2>Family Bottle (1.2L)</h2>
 
-</div>
+        <div class="grid">
 
-<h2>Family Bottle (1.2L)</h2>
+            <div class="input-group">
+                <label>Bottle Quantity</label>
+                <input type="number" id="familyBottleQty" min="0">
+            </div>
 
-<div class="grid">
+            <div class="input-group">
+                <label>Bottle Total Cost (₦)</label>
+                <input type="number" id="familyBottlePrice" min="0">
+            </div>
 
-<div>
-<label>Quantity</label>
-<input id="familyBottleQty" type="number">
-</div>
+            <div class="input-group">
+                <label>Sticker 1.2L Quantity</label>
+                <input type="number" id="familyStickerQty" min="0">
+            </div>
 
-<div>
-<label>Total Price</label>
-<input id="familyBottlePrice" type="number">
-</div>
+            <div class="input-group">
+                <label>Sticker 1.2L Total Cost (₦)</label>
+                <input type="number" id="familyStickerPrice" min="0">
+            </div>
 
-</div>
+        </div>
 
-<h2>Decanter Bottle (330ml)</h2>
+    </section>
 
-<div class="grid">
+    <!-- ================= DECANTER ================= -->
 
-<div>
-<label>Quantity</label>
-<input id="decanterBottleQty" type="number">
-</div>
+    <section class="card">
 
-<div>
-<label>Total Price</label>
-<input id="decanterBottlePrice" type="number">
-</div>
+        <h2>Decanter Bottle (330ml)</h2>
 
-</div>
+        <div class="grid">
 
-<h2>Pouch</h2>
+            <div class="input-group">
+                <label>Bottle Quantity</label>
+                <input type="number" id="decanterBottleQty" min="0">
+            </div>
 
-<div class="grid">
+            <div class="input-group">
+                <label>Bottle Total Cost (₦)</label>
+                <input type="number" id="decanterBottlePrice" min="0">
+            </div>
 
-<div>
-<label>Quantity</label>
-<input id="pouchQty" type="number">
-</div>
+            <div class="input-group">
+                <label>Sticker 330ml Quantity</label>
+                <input type="number" id="decanterStickerQty" min="0">
+            </div>
 
-<div>
-<label>Total Price</label>
-<input id="pouchPrice" type="number">
-</div>
+            <div class="input-group">
+                <label>Sticker 330ml Total Cost (₦)</label>
+                <input type="number" id="decanterStickerPrice" min="0">
+            </div>
 
-</div>
+        </div>
 
-<h2>Business Bottle (5L)</h2>
+    </section>
 
-<div class="grid">
+    <!-- ================= POCKET POUCH ================= -->
 
-<div>
-<label>Quantity</label>
-<input id="businessBottleQty" type="number">
-</div>
+    <section class="card">
 
-<div>
-<label>Total Price</label>
-<input id="businessBottlePrice" type="number">
-</div>
+        <h2>Pocket Pouch (30ml)</h2>
 
-</div>
+        <div class="grid">
 
-<button onclick="calculate()">Calculate Cost Price</button>
+            <div class="input-group">
+                <label>Pouch Quantity</label>
+                <input type="number" id="pocketPouchQty" min="0">
+            </div>
 
-<table>
+            <div class="input-group">
+                <label>Pouch Total Cost (₦)</label>
+                <input type="number" id="pocketPouchPrice" min="0">
+            </div>
 
-<thead>
+            <div class="input-group">
+                <label>Sticker 30ml Quantity</label>
+                <input type="number" id="pocketStickerQty" min="0">
+            </div>
 
-<tr>
+            <div class="input-group">
+                <label>Sticker 30ml Total Cost (₦)</label>
+                <input type="number" id="pocketStickerPrice" min="0">
+            </div>
 
-<th>Product</th>
-<th>Cost Price (₦)</th>
+        </div>
 
-</tr>
+    </section>
 
-</thead>
+    <!-- ================= BUSINESS ================= -->
 
-<tbody id="results"></tbody>
+    <section class="card">
 
-</table>
+        <h2>Business Pouch (5L)</h2>
+
+        <div class="grid">
+
+            <div class="input-group">
+                <label>Pouch Quantity</label>
+                <input type="number" id="businessPouchQty" min="0">
+            </div>
+
+            <div class="input-group">
+                <label>Pouch Total Cost (₦)</label>
+                <input type="number" id="businessPouchPrice" min="0">
+            </div>
+
+            <div class="input-group">
+                <label>Sticker 5L Quantity</label>
+                <input type="number" id="businessStickerQty" min="0">
+            </div>
+
+            <div class="input-group">
+                <label>Sticker 5L Total Cost (₦)</label>
+                <input type="number" id="businessStickerPrice" min="0">
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ================= BUTTON ================= -->
+
+    <div class="button-area">
+        <button id="calculateBtn" onclick="calculate()">
+            Calculate Cost Price
+        </button>
+    </div>
+
+    <!-- ================= RESULTS ================= -->
+
+    <section class="card">
+
+        <h2>Cost Price Summary</h2>
+
+        <table>
+
+            <thead>
+
+            <tr>
+                <th>Product</th>
+                <th>Syrup Cost (₦)</th>
+                <th>Packaging Cost (₦)</th>
+                <th>Total Cost Price (₦)</th>
+            </tr>
+
+            </thead>
+
+            <tbody id="results">
+
+            <tr>
+                <td>Family Bottle (1.2L)</td>
+                <td>₦0.00</td>
+                <td>₦0.00</td>
+                <td>₦0.00</td>
+            </tr>
+
+            <tr>
+                <td>Decanter Bottle (330ml)</td>
+                <td>₦0.00</td>
+                <td>₦0.00</td>
+                <td>₦0.00</td>
+            </tr>
+
+            <tr>
+                <td>Pocket Pouch (30ml)</td>
+                <td>₦0.00</td>
+                <td>₦0.00</td>
+                <td>₦0.00</td>
+            </tr>
+
+            <tr>
+                <td>Business Pouch (5L)</td>
+                <td>₦0.00</td>
+                <td>₦0.00</td>
+                <td>₦0.00</td>
+            </tr>
+
+            </tbody>
+
+        </table>
+
+    </section>
+
+    <!-- ================= HISTORY ================= -->
+
+    <section class="card">
+
+        <h2>Calculation History</h2>
+
+        <table>
+
+            <thead>
+
+            <tr>
+                <th>Date & Time</th>
+                <th>Family</th>
+                <th>Decanter</th>
+                <th>Pocket</th>
+                <th>Business</th>
+            </tr>
+
+            </thead>
+
+            <tbody id="historyBody">
+
+            </tbody>
+
+        </table>
+
+    </section>
 
 </div>
 
