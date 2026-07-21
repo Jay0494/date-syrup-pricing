@@ -121,3 +121,113 @@ Developed By **DataIntell Technologies** for **AmbyDates Foods Limited**.
 ## Version
 
 **Version:** 1.0.0
+
+
+
+
+
+## Version 2.0 Update
+
+### Overview
+
+This update improves the pricing calculator by introducing product-specific packaging logic and a more accurate production cost calculation.
+
+### Changes
+
+#### Product Renaming
+
+* **Pouch (30ml)** → **Pocket Pouch (30ml)**
+* **Business Bottle (5L)** → **Business Pouch (5L)**
+
+#### Product-Specific Stickers
+
+Each product now uses its own sticker type:
+
+| Product                 | Sticker       |
+| ----------------------- | ------------- |
+| Family Bottle (1.2L)    | Sticker 1.2L  |
+| Decanter Bottle (330ml) | Sticker 330ml |
+| Pocket Pouch (30ml)     | Sticker 30ml  |
+| Business Pouch (5L)     | Sticker 5L    |
+
+#### Updated Packaging Logic
+
+Packaging costs are now calculated according to the packaging materials actually used for each product.
+
+##### Family Bottle (1.2L)
+
+Includes:
+
+* Bottle
+* Sticker 1.2L
+* Sealing Nylon
+
+##### Decanter Bottle (330ml)
+
+Includes:
+
+* Bottle
+* Sticker 330ml
+* Sealing Nylon
+
+##### Pocket Pouch (30ml)
+
+Includes:
+
+* Pocket Pouch
+* Sticker 30ml
+
+**Sealing nylon is not included.**
+
+##### Business Pouch (5L)
+
+Includes:
+
+* Business Pouch
+* Sticker 5L
+
+**Sealing nylon is not included.**
+
+### Calculation Logic
+
+The application calculates the production cost per litre using:
+
+* 3 kg of date seeds = 1 litre of date syrup
+* 0.3125 kg of gas = 1 litre of date syrup
+* Fixed water and electricity cost of **₦500 per litre**
+
+The final cost price for each product is calculated as:
+
+```text
+Cost Price =
+(Syrup Required × Cost Per Litre)
++ Packaging Cost
+```
+
+Where the packaging cost is determined by the materials required for that specific product.
+
+### Conditional Calculations
+
+To improve accuracy, the calculator only computes the cost of products with a valid packaging quantity entered.
+
+If a product has no packaging quantity, its values remain:
+
+* Syrup Cost = ₦0.00
+* Packaging Cost = ₦0.00
+* Total Cost = ₦0.00
+
+### New Features
+
+* Product-specific sticker pricing.
+* Updated product names.
+* Separate packaging logic for bottles and pouches.
+* Automatic currency formatting.
+* Calculation history with timestamps.
+* Cleaner and more maintainable JavaScript structure.
+
+---
+
+**Version:** 2.0.0
+
+**Last Updated:** July 2026
+
