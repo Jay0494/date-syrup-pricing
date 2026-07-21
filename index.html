@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Date Syrup Pricing Calculator</title>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Date Syrup Pricing Calculator</h1>
+
+<h2>Date Seeds</h2>
+
+<div class="grid">
+
+<div>
+<label>Total Kg Bought</label>
+<input id="seedKg" type="number">
+</div>
+
+<div>
+<label>Total Price (₦)</label>
+<input id="seedPrice" type="number">
+</div>
+
+</div>
+
+<h2>Gas</h2>
+
+<div class="grid">
+
+<div>
+<label>Total Kg</label>
+<input id="gasKg" type="number">
+</div>
+
+<div>
+<label>Total Price (₦)</label>
+<input id="gasPrice" type="number">
+</div>
+
+</div>
+
+<h2>Sticker</h2>
+
+<div class="grid">
+
+<div>
+<label>Quantity</label>
+<input id="stickerQty" type="number">
+</div>
+
+<div>
+<label>Total Price</label>
+<input id="stickerPrice" type="number">
+</div>
+
+</div>
+
+<h2>Sealing Nylon</h2>
+
+<div class="grid">
+
+<div>
+<label>Quantity</label>
+<input id="nylonQty" type="number">
+</div>
+
+<div>
+<label>Total Price</label>
+<input id="nylonPrice" type="number">
+</div>
+
+</div>
+
+<h2>Family Bottle (1.2L)</h2>
+
+<div class="grid">
+
+<div>
+<label>Quantity</label>
+<input id="familyBottleQty" type="number">
+</div>
+
+<div>
+<label>Total Price</label>
+<input id="familyBottlePrice" type="number">
+</div>
+
+</div>
+
+<h2>Decanter Bottle (330ml)</h2>
+
+<div class="grid">
+
+<div>
+<label>Quantity</label>
+<input id="decanterBottleQty" type="number">
+</div>
+
+<div>
+<label>Total Price</label>
+<input id="decanterBottlePrice" type="number">
+</div>
+
+</div>
+
+<h2>Pouch</h2>
+
+<div class="grid">
+
+<div>
+<label>Quantity</label>
+<input id="pouchQty" type="number">
+</div>
+
+<div>
+<label>Total Price</label>
+<input id="pouchPrice" type="number">
+</div>
+
+</div>
+
+<h2>Business Bottle (5L)</h2>
+
+<div class="grid">
+
+<div>
+<label>Quantity</label>
+<input id="businessBottleQty" type="number">
+</div>
+
+<div>
+<label>Total Price</label>
+<input id="businessBottlePrice" type="number">
+</div>
+
+</div>
+
+<button onclick="calculate()">Calculate Cost Price</button>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Product</th>
+<th>Cost Price (₦)</th>
+
+</tr>
+
+</thead>
+
+<tbody id="results"></tbody>
+
+</table>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
