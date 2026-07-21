@@ -80,7 +80,7 @@ date-syrup-pricing/
 * CSS3
 * JavaScript (ES6)
 
-No external libraries or frameworks are required.
+No external libraries or frameworks was required.
 
 ---
 
@@ -114,7 +114,7 @@ This project contains proprietary business logic and pricing calculations develo
 
 ## Author
 
-Developed for **AmbyDates Foods Limited**.
+Developed By **DataIntell Technologies** for **AmbyDates Foods Limited**.
 
 ---
 
